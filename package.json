@@ -10,7 +10,15 @@
   "license": "ISC",
   "dependencies": {
     "gulp": "^3.9.1",
+    "gulp-connect": "^5.0.0",
     "gulp-imagemin": "^3.3.0",
     "imagemin": "^5.3.1"
+  },
+  "devDependencies": {
+    "gulp-exit": "0.0.2",
+    "ngrok": "^2.2.17",
+    "psi": "^3.0.0",
+    "psi-ngrok": "^0.1.2",
+    "run-sequence": "^2.1.0"
   }
 }
