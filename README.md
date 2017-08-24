@@ -6,6 +6,7 @@ You have two options to run this application:
 
 Option 1: Download the repository, unzip and run the index.html file found at the root directory
             Note: Please ignore the gulpfile.js, package.json and package-lock.json files along with any related files. These are not               necessary to run the application and were for experimental reasons only.
+            
 Option 2: Open this link <a href = "https://enoussair.github.io/optimization-project/"> Pizza.html</a>.
 
 Whichever option you choose, you will be able to view the portfolio which will have a link to the Pizzaria website
