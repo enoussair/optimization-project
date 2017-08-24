@@ -447,9 +447,11 @@ var resizePizzas = function(size) {
   function changePizzaSizes(size) {
       var dx = determineDx(document.getElementsByClassName("randomPizzaContainer")[0], size);
       var newwidth = (document.getElementsByClassName("randomPizzaContainer")[0].offsetWidth + dx) + 'px';
+      var pizza = document.getElementsByClassName("randomPizzaContainer");
+      var pizzaContainerLength = pizza.length;
 
-    for (var i = 0; i < document.getElementsByClassName("randomPizzaContainer").length; i++) {
-      document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
+    for (var i = 0; i < pizzaContainerLength; i++) {
+      pizza[i].style.width = newwidth;
     }
   }
 
@@ -494,7 +496,6 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
 // Moves the sliding background pizzas based on scroll position
-var latestKnownScrollY = 0;
 var tick = false;
 
 function onScroll(){
@@ -513,13 +514,15 @@ function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
 
-  var phaseConst = document.body.scrollTop / 1250;
 
   var items = document.getElementsByClassName('mover');
+  var itemsLength = items.length;
+  
+  var phaseConst = document.body.scrollTop / 1250;
+  var phase = [Math.sin(phaseConst)*100,Math.sin(phaseConst + 1)*100,Math.sin(phaseConst + 2)*100,Math.sin(phaseConst + 3)*100,Math.sin(phaseConst + 4)*100];
 
-  for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin(phaseConst + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+  for (var i = 0; i < itemsLength; i++) {
+    items[i].style.left = items[i].basicLeft + phase[i%5] + 'px';
   }
   // User Timing API to the rescue again. Seriously, it's worth learning.
   // Super easy to create custom metrics.
@@ -545,7 +548,9 @@ document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
   var s = 256;
   var fragment = document.createDocumentFragment();
-  for (var i = 0; i < 200; i++) {
+
+  var pizzaAmount = window.innerHeight/30;
+  for (var i = 0; i < pizzaAmount; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
